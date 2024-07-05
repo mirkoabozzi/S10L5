@@ -7,7 +7,7 @@ const Home = ({ weather }) => {
 
   const navigate = useNavigate();
 
-  const tempToC = (value) => (value / 10).toFixed(1);
+  const tempToC = (value) => (value - 273).toFixed(1);
   const speedToKm = (value) => (value * 3.6).toFixed(2);
 
   return (
@@ -41,7 +41,7 @@ const Home = ({ weather }) => {
           {/* <p className="text-center">data</p> */}
         </Container>
       </main>
-      <Container className="bg-white text-black border border rounded">
+      <Container className=" section bg-white border border rounded">
         <section>
           <Container>
             <h2>Weader Information</h2>
