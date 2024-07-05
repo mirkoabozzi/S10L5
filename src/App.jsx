@@ -58,6 +58,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          {/* <Route path="/" element={<Search />} /> */}
           <Route path="/" element={weather && <Home weather={weather} />} />
         </Routes>
       </BrowserRouter>
