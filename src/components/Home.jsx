@@ -95,9 +95,8 @@ const Home = ({ weather }) => {
                 <Image src={iconUrl} width={50} />
                 <p>{tempToC(weather.main.temp)}°</p>
               </Col>
-              <Col sm="2">11</Col>
-              <Col sm="2">12</Col>
-              <Col sm="2">13</Col>
+              <Col sm="2">Tomorrow</Col>
+              <Col sm="2">The Day After Tomorrow</Col>
             </Row>
           </Container>
         </section>

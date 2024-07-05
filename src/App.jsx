@@ -69,7 +69,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Search userCountry={userCountry} />} />
-          <Route path="/:country" element={weather && <Home weather={weather} />} />
+          <Route path="/details/:country" element={weather && <Home weather={weather} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

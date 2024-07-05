@@ -23,7 +23,7 @@ const Search = (props) => {
           variant="dark"
           onClick={() => {
             props.userCountry(userInput);
-            navigate("/:" + userInput);
+            navigate("/details/:" + userInput);
           }}
         >
           Cerca
