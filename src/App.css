@@ -8,10 +8,13 @@ body {
 }
 
 .mainContainer {
-  background-color: #0c73ec;
+  background: linear-gradient(90deg, rgba(71, 152, 233, 1) 0%, rgba(12, 115, 236, 1) 100%);
   padding: 1rem;
 }
 
 .section {
   color: #0f3768;
+}
+.borderBottom {
+  border-bottom: 2px solid rgba(12, 115, 236, 1);
 }

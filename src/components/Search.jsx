@@ -23,11 +23,11 @@ const Search = () => {
 
   return (
     <Container className="mainContainer mt-5 rounded-4">
-      <h1>Benvenuto!</h1>
+      <h1>Welcome!</h1>
       <InputGroup className="my-3">
-        <Form.Control type="text" placeholder="Cerca una località" aria-describedby="basic-addon2" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+        <Form.Control type="text" placeholder="Search your country" aria-describedby="basic-addon2" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
         <Button variant="dark" onClick={geolocalFetch}>
-          Cerca
+          Search
         </Button>
       </InputGroup>
     </Container>
