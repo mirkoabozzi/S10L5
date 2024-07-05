@@ -1,18 +1,27 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import Home from "./components/Home";
 import { useEffect, useState } from "react";
+import Search from "./components/Search";
 
 function App() {
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
-
   const [weather, setWether] = useState(null);
+
+  const [country, setCountry] = useState("sedini");
+
+  const params = useParams();
+  console.log("params", params);
+
+  const userCountry = (newCountry) => {
+    setCountry(newCountry);
+  };
 
   const geolocalFetch = async () => {
     try {
-      const resp = await fetch("http://api.openweathermap.org/geo/1.0/direct?q=sedini&limit=2&appid=6136007826f2425e507093e16cf8aade");
+      const resp = await fetch("http://api.openweathermap.org/geo/1.0/direct?q=" + country + "&limit=2&appid=6136007826f2425e507093e16cf8aade");
       if (resp.ok) {
         const result = await resp.json();
         setLat(result[0].lat);
@@ -43,7 +52,7 @@ function App() {
   useEffect(() => {
     geolocalFetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [country]);
 
   useEffect(() => {
     fetchWeather();
@@ -58,8 +67,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<Search />} /> */}
-          <Route path="/" element={weather && <Home weather={weather} />} />
+          <Route path="/search" element={<Search userCountry={userCountry} />} />
+          <Route path="/:country" element={weather && <Home weather={weather} />} />
         </Routes>
       </BrowserRouter>
     </>
