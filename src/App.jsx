@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import Home from "./components/Home";
 import { useEffect, useState } from "react";
 import Search from "./components/Search";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [lat, setLat] = useState("");
@@ -67,8 +68,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/search" element={<Search userCountry={userCountry} />} />
+          <Route path="/" element={<Search userCountry={userCountry} />} />
           <Route path="/:country" element={weather && <Home weather={weather} />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>
