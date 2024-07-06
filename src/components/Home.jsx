@@ -99,9 +99,9 @@ const Home = () => {
           </h1>
         </header>
         <main>
-          <Container className="d-flex justify-content-center">
+          <Container className="d-flex justify-content-center position-relative">
             <Image src={"http://openweathermap.org/img/w/" + weather.weather[0].icon + ".png"} width={200} />
-            <h1>{tempToC(weather.main.temp)}°</h1>
+            <h1 className="position-absolute start-50">{tempToC(weather.main.temp)}°</h1>
           </Container>
           <Container>
             <h1 className="text-center mb-4">{weather.weather[0].main}</h1>
