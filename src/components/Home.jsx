@@ -47,7 +47,7 @@ const Home = () => {
   const fetchForecast = async () => {
     try {
       const resp = await fetch(`https://api.openweathermap.org/data/2.5/forecast?${country}&appid=6136007826f2425e507093e16cf8aade`);
-      if (resp) {
+      if (resp.ok) {
         const result = await resp.json();
         // console.log("Forecast", result);
         setForecast(result.list);
@@ -69,7 +69,7 @@ const Home = () => {
   }, [country]);
 
   // console.log("Home Weader", weather);
-  // console.log("Home forecast", forecast);
+  console.log("Home forecast", forecast);
   // console.log("Tomorrow", tomorrow);
 
   // const data = new Date(weather.dt * 1000);
@@ -146,6 +146,24 @@ const Home = () => {
                   </svg>
                   {weather.main.humidity} %
                 </Col>
+              </Row>
+            </Container>
+          </section>
+          <section>
+            <Container className="mt-4 borderBottom horizontalScroll">
+              <Row className="justify-content-around flex-nowrap overflow-x-auto">
+                {forecast.map((day, index) => {
+                  if (index < 5) {
+                    return (
+                      <Col key={index} sm="3" className="text-center">
+                        {/* <h5>Next Hours </h5> */}
+                        <p>{dataConverter(day.dt)}</p>
+                        <Image src={"http://openweathermap.org/img/w/" + day.weather[0].icon + ".png"} width={50} />
+                        <p>{tempToC(day.main.temp)}°</p>
+                      </Col>
+                    );
+                  }
+                })}
               </Row>
             </Container>
           </section>
