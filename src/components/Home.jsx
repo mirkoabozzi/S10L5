@@ -111,7 +111,7 @@ const Home = () => {
             <p className="text-center">{dataConverter(weather.dt)}</p>
           </Container>
         </main>
-        <Container className=" section bg-white border border rounded">
+        <Container className=" section bg-white border rounded-4">
           <section>
             <Container className="borderBottom">
               <h2 className="mt-4">Weather Information</h2>
