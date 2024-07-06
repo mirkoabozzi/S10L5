@@ -18,3 +18,14 @@ body {
 .borderBottom {
   border-bottom: 2px solid rgba(12, 115, 236, 1);
 }
+
+svg,
+img {
+  transition: 300ms;
+}
+
+svg:hover,
+img:hover {
+  scale: 1.3;
+  transition: 300ms;
+}
