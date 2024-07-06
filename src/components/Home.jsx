@@ -5,26 +5,29 @@ import { useNavigate, useParams } from "react-router-dom";
 const Home = () => {
   const params = useParams();
   const country = params.country;
-  console.log("Country params", country);
+  // console.log("Country params", country);
 
-  const [weather, setWether] = useState(null);
+  const [weather, setWeather] = useState(null);
 
   const [forecast, setForecast] = useState([]);
 
   const tomorrow = forecast[9];
-  const theDayAfter = forecast[17];
+  const inTwoDays = forecast[17];
+  const inThreeDays = forecast[25];
 
   const navigate = useNavigate();
 
   const tempToC = (value) => (value - 273).toFixed(1);
   const speedToKm = (value) => (value * 3.6).toFixed(2);
-
-  // const data = new Date();
-  // const localTime = data.getTime();
-  // const localOfset = data.getTimezoneOffset() * 6000;
-
-  // console.log(localTime);
-  // console.log(localOfset);
+  const dataConverter = (timeStamp) => {
+    const data = new Date(timeStamp * 1000);
+    return data.toLocaleString("en-En", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+    });
+  };
 
   const fetchWeather = async () => {
     try {
@@ -32,7 +35,7 @@ const Home = () => {
 
       if (resp.ok) {
         const result = await resp.json();
-        setWether(result);
+        setWeather(result);
       } else {
         throw new Error("Errore nel recupero dei dati");
       }
@@ -56,17 +59,20 @@ const Home = () => {
 
   useEffect(() => {
     fetchWeather();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [country]);
 
   useEffect(() => {
     fetchForecast();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [country]);
 
   // console.log("Home Weader", weather);
-  console.log("Home forecast", forecast);
-  console.log("Tomorrow", tomorrow);
+  // console.log("Home forecast", forecast);
+  // console.log("Tomorrow", tomorrow);
+
+  // const data = new Date(weather.dt * 1000);
 
   return (
     weather && (
@@ -97,7 +103,7 @@ const Home = () => {
           </Container>
           <Container>
             <h1 className="text-center mb-4">{weather.weather[0].main}</h1>
-            <p className="text-center">{weather.dt}</p>
+            <p className="text-center">{dataConverter(weather.dt)}</p>
           </Container>
         </main>
         <Container className=" section bg-white border border rounded">
@@ -147,22 +153,23 @@ const Home = () => {
             <Container className="mt-4">
               {tomorrow && (
                 <Row className="justify-content-around">
-                  <Col sm="3">
-                    <h5>Today</h5>
-                    <Image src={"http://openweathermap.org/img/w/" + weather.weather[0].icon + ".png"} width={50} />
-                    <p>{tempToC(weather.main.temp)}°</p>
-                  </Col>
-                  <Col sm="3">
+                  <Col sm="3" className="text-center">
                     <h5>Tomorrow </h5>
-                    <p>{tomorrow.dt}</p>
+                    <p>{dataConverter(tomorrow.dt)}</p>
                     <Image src={"http://openweathermap.org/img/w/" + tomorrow.weather[0].icon + ".png"} width={50} />
                     <p>{tempToC(tomorrow.main.temp)}°</p>
                   </Col>
-                  <Col sm="3">
+                  <Col sm="3" className="text-center">
                     <h5>In Two Days</h5>
-                    <p>{tomorrow.dt}</p>
-                    <Image src={"http://openweathermap.org/img/w/" + theDayAfter.weather[0].icon + ".png"} width={50} />
-                    <p>{tempToC(theDayAfter.main.temp)}°</p>
+                    <p>{dataConverter(inTwoDays.dt)}</p>
+                    <Image src={"http://openweathermap.org/img/w/" + inTwoDays.weather[0].icon + ".png"} width={50} />
+                    <p>{tempToC(inTwoDays.main.temp)}°</p>
+                  </Col>
+                  <Col sm="3" className="text-center">
+                    <h5>In Three Days</h5>
+                    <p>{dataConverter(inThreeDays.dt)}</p>
+                    <Image src={"http://openweathermap.org/img/w/" + inThreeDays.weather[0].icon + ".png"} width={50} />
+                    <p>{tempToC(inThreeDays.main.temp)}°</p>
                   </Col>
                 </Row>
               )}
