@@ -68,11 +68,9 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [country]);
 
-  // console.log("Home Weader", weather);
-  console.log("Home forecast", forecast);
+  console.log("Home Weader", weather);
+  // console.log("Home forecast", forecast);
   // console.log("Tomorrow", tomorrow);
-
-  // const data = new Date(weather.dt * 1000);
 
   return (
     weather && (
@@ -103,6 +101,9 @@ const Home = () => {
           </Container>
           <Container>
             <h1 className="text-center mb-4">{weather.weather[0].main}</h1>
+            <p className="text-center mb-4">
+              Min - {tempToC(weather.main.temp_min)}° - Max - {tempToC(weather.main.temp_max)}°
+            </p>
             <p className="text-center">{dataConverter(weather.dt)}</p>
           </Container>
         </main>
