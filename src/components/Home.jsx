@@ -11,9 +11,9 @@ const Home = () => {
 
   const [forecast, setForecast] = useState([]);
 
-  const tomorrow = forecast[9];
-  const inTwoDays = forecast[17];
-  const inThreeDays = forecast[25];
+  const tomorrow = forecast[8];
+  const inTwoDays = forecast[16];
+  const inThreeDays = forecast[24];
 
   const navigate = useNavigate();
 
@@ -150,10 +150,10 @@ const Home = () => {
             </Container>
           </section>
           <section>
-            <Container className="mt-4 borderBottom horizontalScroll">
+            <Container className="mt-4 borderBottom">
               <Row className="justify-content-around flex-nowrap overflow-x-auto">
                 {forecast.map((day, index) => {
-                  if (index < 5) {
+                  if (index < 8) {
                     return (
                       <Col key={index} sm="3" className="text-center">
                         {/* <h5>Next Hours </h5> */}
