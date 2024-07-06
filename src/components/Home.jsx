@@ -9,10 +9,22 @@ const Home = () => {
 
   const [weather, setWether] = useState(null);
 
+  const [forecast, setForecast] = useState([]);
+
+  const tomorrow = forecast[9];
+  const theDayAfter = forecast[17];
+
   const navigate = useNavigate();
 
   const tempToC = (value) => (value - 273).toFixed(1);
   const speedToKm = (value) => (value * 3.6).toFixed(2);
+
+  // const data = new Date();
+  // const localTime = data.getTime();
+  // const localOfset = data.getTimezoneOffset() * 6000;
+
+  // console.log(localTime);
+  // console.log(localOfset);
 
   const fetchWeather = async () => {
     try {
@@ -29,12 +41,32 @@ const Home = () => {
     }
   };
 
+  const fetchForecast = async () => {
+    try {
+      const resp = await fetch(`https://api.openweathermap.org/data/2.5/forecast?${country}&appid=6136007826f2425e507093e16cf8aade`);
+      if (resp) {
+        const result = await resp.json();
+        // console.log("Forecast", result);
+        setForecast(result.list);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchWeather();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [country]);
 
-  console.log("Home Weader", weather);
+  useEffect(() => {
+    fetchForecast();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // console.log("Home Weader", weather);
+  console.log("Home forecast", forecast);
+  console.log("Tomorrow", tomorrow);
 
   return (
     weather && (
@@ -65,7 +97,7 @@ const Home = () => {
           </Container>
           <Container>
             <h1 className="text-center mb-4">{weather.weather[0].main}</h1>
-            {/* <p className="text-center">data</p> */}
+            <p className="text-center">{weather.dt}</p>
           </Container>
         </main>
         <Container className=" section bg-white border border rounded">
@@ -113,15 +145,27 @@ const Home = () => {
           </section>
           <section>
             <Container className="mt-4">
-              <Row className="justify-content-between">
-                <Col sm="2">
-                  <h5>Today</h5>
-                  <Image src={"http://openweathermap.org/img/w/" + weather.weather[0].icon + ".png"} width={50} />
-                  <p>{tempToC(weather.main.temp)}°</p>
-                </Col>
-                <Col sm="2">Tomorrow</Col>
-                <Col sm="2">The Day After Tomorrow</Col>
-              </Row>
+              {tomorrow && (
+                <Row className="justify-content-around">
+                  <Col sm="3">
+                    <h5>Today</h5>
+                    <Image src={"http://openweathermap.org/img/w/" + weather.weather[0].icon + ".png"} width={50} />
+                    <p>{tempToC(weather.main.temp)}°</p>
+                  </Col>
+                  <Col sm="3">
+                    <h5>Tomorrow </h5>
+                    <p>{tomorrow.dt}</p>
+                    <Image src={"http://openweathermap.org/img/w/" + tomorrow.weather[0].icon + ".png"} width={50} />
+                    <p>{tempToC(tomorrow.main.temp)}°</p>
+                  </Col>
+                  <Col sm="3">
+                    <h5>In Two Days</h5>
+                    <p>{tomorrow.dt}</p>
+                    <Image src={"http://openweathermap.org/img/w/" + theDayAfter.weather[0].icon + ".png"} width={50} />
+                    <p>{tempToC(theDayAfter.main.temp)}°</p>
+                  </Col>
+                </Row>
+              )}
             </Container>
           </section>
         </Container>
