@@ -1,6 +1,26 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import i1d from "../assets/weathericon/01d.svg";
+import i1n from "../assets/weathericon/01n.svg";
+import i2d from "../assets/weathericon/02d.svg";
+import i2n from "../assets/weathericon/02n.svg";
+import i3d from "../assets/weathericon/03d.svg";
+import i3n from "../assets/weathericon/03n.svg";
+import i4d from "../assets/weathericon/04d.svg";
+import i4n from "../assets/weathericon/04n.svg";
+import i9d from "../assets/weathericon/09d.svg";
+import i9n from "../assets/weathericon/09n.svg";
+import i10d from "../assets/weathericon/10d.svg";
+import i10n from "../assets/weathericon/10n.svg";
+import i11d from "../assets/weathericon/11d.svg";
+import i11n from "../assets/weathericon/11n.svg";
+import i13d from "../assets/weathericon/13d.svg";
+import i13n from "../assets/weathericon/13n.svg";
+import i50d from "../assets/weathericon/50d.svg";
+import i50n from "../assets/weathericon/50n.svg";
+import colder from "../assets/weathericon/thermometer-colder.svg";
+import warmer from "../assets/weathericon/thermometer-warmer.svg";
 
 const Home = () => {
   const params = useParams();
@@ -31,6 +51,27 @@ const Home = () => {
       hour: "numeric",
       // minute: "numeric",
     });
+  };
+
+  const allIcon = {
+    "01d": i1d,
+    "01n": i1n,
+    "02d": i2d,
+    "02n": i2n,
+    "03d": i3d,
+    "03n": i3n,
+    "04d": i4d,
+    "04n": i4n,
+    "09d": i9d,
+    "09n": i9n,
+    "10d": i10d,
+    "10n": i10n,
+    "11d": i11d,
+    "11n": i11n,
+    "13d": i13d,
+    "13n": i13n,
+    "50d": i50d,
+    "50n": i50n,
   };
 
   const fetchWeather = async () => {
@@ -72,9 +113,10 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [country]);
 
-  console.log("Home Weader", weather);
+  // console.log("Home Weader", weather);
   // console.log("Home forecast", forecast);
   // console.log("Tomorrow", tomorrow);
+  // console.log("Icon", weather.weather[0].icon);
 
   return (
     weather && (
@@ -100,7 +142,7 @@ const Home = () => {
         </header>
         <main>
           <Container className="d-flex justify-content-center position-relative">
-            <Image src={"http://openweathermap.org/img/w/" + weather.weather[0].icon + ".png"} width={200} />
+            <Image src={allIcon[weather.weather[0].icon]} width={200} />
             <h1 className="position-absolute start-50">{tempToC(weather.main.temp)}°</h1>
           </Container>
           <Container>
@@ -163,7 +205,7 @@ const Home = () => {
                       <Col key={index} sm="3" className="text-center">
                         {/* <h5>Next Hours </h5> */}
                         <p>{dataConverter(day.dt)}</p>
-                        <Image src={"http://openweathermap.org/img/w/" + day.weather[0].icon + ".png"} width={50} />
+                        <Image src={allIcon[day.weather[0].icon]} width={50} />
                         <p>{tempToC(day.main.temp)}°</p>
                       </Col>
                     );
@@ -179,19 +221,19 @@ const Home = () => {
                   <Col sm="3" className="text-center">
                     <h5>Tomorrow </h5>
                     <p>{dataConverter(tomorrow.dt)}</p>
-                    <Image src={"http://openweathermap.org/img/w/" + tomorrow.weather[0].icon + ".png"} width={50} />
+                    <Image src={allIcon[tomorrow.weather[0].icon]} width={50} />
                     <p>{tempToC(tomorrow.main.temp)}°</p>
                   </Col>
                   <Col sm="3" className="text-center">
                     <h5>In Two Days</h5>
                     <p>{dataConverter(inTwoDays.dt)}</p>
-                    <Image src={"http://openweathermap.org/img/w/" + inTwoDays.weather[0].icon + ".png"} width={50} />
+                    <Image src={allIcon[inTwoDays.weather[0].icon]} width={50} />
                     <p>{tempToC(inTwoDays.main.temp)}°</p>
                   </Col>
                   <Col sm="3" className="text-center">
                     <h5>In Three Days</h5>
                     <p>{dataConverter(inThreeDays.dt)}</p>
-                    <Image src={"http://openweathermap.org/img/w/" + inThreeDays.weather[0].icon + ".png"} width={50} />
+                    <Image src={allIcon[inThreeDays.weather[0].icon]} width={50} />
                     <p>{tempToC(inThreeDays.main.temp)}°</p>
                   </Col>
                 </Row>
