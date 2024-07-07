@@ -117,7 +117,7 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [country]);
 
-  // console.log("Home Weader", weather);
+  console.log("Home Weader", weather);
   // console.log("Home forecast", forecast);
   // console.log("Tomorrow", tomorrow);
   // console.log("Icon", weather.weather[0].icon);
@@ -149,13 +149,22 @@ const Home = () => {
             <Image src={allIcon[weather.weather[0].icon]} alt="dynamic sky image" width={200} />
             <h1 className="mainTemp">{tempToC(weather.main.temp)}°</h1>
           </Container>
-          <Container>
-            <h1 className="text-center mb-4">{weather.weather[0].main}</h1>
-            <p className="text-center mb-4">
-              Min - {tempToC(weather.main.temp_min)}° - Max - {tempToC(weather.main.temp_max)}°
-            </p>
+          <h1 className="text-center mb-4">{weather.weather[0].main}</h1>
+          <Row className="justify-content-center">
+            <Col xs="2">
+              <div className="text-center">
+                <Image className="bg-white shadow rounded-circle mb-2" src={colder} alt="thermometer cold" width={50} />
+              </div>
+              <p className="text-center">{tempToC(weather.main.temp_min)}°</p>
+            </Col>
+            <Col xs="2">
+              <div className="text-center">
+                <Image className="bg-white shadow rounded-circle mb-2" src={warmer} alt="thermometer warm" width={50} />
+              </div>
+              <p className="text-center">{tempToC(weather.main.temp_max)}°</p>
+            </Col>
             <p className="text-center">{dataConverter(weather.dt)}</p>
-          </Container>
+          </Row>
         </main>
         <Container className=" section bg-white border rounded-4">
           <section>

@@ -22,6 +22,7 @@ body {
 svg,
 img {
   transition: 300ms;
+  animation: fadeIn 1s;
 }
 
 svg:hover,
@@ -32,4 +33,13 @@ img:hover {
 .mainTemp {
   position: absolute;
   transform: translateX(100px);
+}
+
+@keyframes fadeIn {
+  from {
+    scale: 0;
+  }
+  to {
+    scale: 1;
+  }
 }
