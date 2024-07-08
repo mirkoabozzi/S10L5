@@ -124,7 +124,7 @@ const Home = () => {
 
   return (
     weather && (
-      <Container className="mainContainer mt-5 rounded-4">
+      <Container className="mainContainer my-3 rounded-4">
         <header>
           <Row>
             <Col>
@@ -153,13 +153,13 @@ const Home = () => {
           <Row className="justify-content-center">
             <Col xs="2">
               <div className="text-center">
-                <Image className="bg-white shadow rounded-circle mb-2" src={colder} alt="thermometer cold" width={50} />
+                <Image fluid className="bg-white shadow rounded-circle mb-2" src={colder} alt="thermometer cold" width={50} />
               </div>
               <p className="text-center">{tempToC(weather.main.temp_min)}°</p>
             </Col>
             <Col xs="2">
               <div className="text-center">
-                <Image className="bg-white shadow rounded-circle mb-2" src={warmer} alt="thermometer warm" width={50} />
+                <Image fluid className="bg-white shadow rounded-circle mb-2" src={warmer} alt="thermometer warm" width={50} />
               </div>
               <p className="text-center">{tempToC(weather.main.temp_max)}°</p>
             </Col>
@@ -202,7 +202,7 @@ const Home = () => {
                 {forecast.map((day, index) => {
                   if (index < 8) {
                     return (
-                      <Col key={index} sm="3" className="text-center">
+                      <Col key={index} xs="6" sm="3" className="text-center">
                         {/* <h5>Next Hours </h5> */}
                         <p>{dataConverter(day.dt)}</p>
                         <Image src={allIcon[day.weather[0].icon]} alt="dynamic sky image" width={50} />
