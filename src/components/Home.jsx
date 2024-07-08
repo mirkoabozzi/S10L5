@@ -145,7 +145,7 @@ const Home = () => {
           </h1>
         </header>
         <main>
-          <Container className="d-flex justify-content-center position-relative">
+          <Container className="d-flex justify-content-center  align-items-center">
             <Image src={allIcon[weather.weather[0].icon]} alt="dynamic sky image" width={200} />
             <h1 className="mainTemp">{tempToC(weather.main.temp)}°</h1>
           </Container>
@@ -169,26 +169,26 @@ const Home = () => {
         <Container className=" section bg-white border rounded-4">
           <section>
             <Container className="borderBottom">
-              <h2 className="mt-4">Weather Information</h2>
+              <p className="mt-4 fw-bolder">Weather Information</p>
               <Row className="justify-content-around">
-                <Col sm="4" className="mb-4 text-center">
+                <Col xs="4" className="mb-4 text-center">
                   <p className="mb-0">Feels Like</p>
                   <Image src={thermometer} alt="thermometer" width={50} />
                   {tempToC(weather.main.feels_like)}°
                 </Col>
-                <Col sm="4" className="mb-4 text-center">
+                <Col xs="4" className="mb-4 text-center">
                   <p className="mb-0">Wind Speed</p>
                   <Image src={wind} alt="wind image" width={50} />
                   {speedToKm(weather.wind.speed)} km/h
                 </Col>
               </Row>
               <Row className="justify-content-around">
-                <Col sm="4" className="mb-4 text-center">
+                <Col xs="4" className="mb-4 text-center">
                   <p className="mb-0">Precipitation</p>
                   <Image src={raindrops} alt="rain drops" width={50} />
                   {upperCase(weather.weather[0].description)}
                 </Col>
-                <Col sm="4" className="mb-4 text-center">
+                <Col xs="4" className="mb-4 text-center">
                   <p className="mb-0">Umidity</p>
                   <Image src={humidity} alt="rain drop" width={50} />
                   {weather.main.humidity} %
@@ -219,19 +219,19 @@ const Home = () => {
               {tomorrow && (
                 <Row className="justify-content-around">
                   <Col sm="3" className="text-center">
-                    <h5>Tomorrow </h5>
+                    <p className="fw-bolder">Tomorrow </p>
                     <p>{dataConverter(tomorrow.dt)}</p>
                     <Image src={allIcon[tomorrow.weather[0].icon]} alt="dynamic sky image" width={50} />
                     <p>{tempToC(tomorrow.main.temp)}°</p>
                   </Col>
                   <Col sm="3" className="text-center">
-                    <h5>In Two Days</h5>
+                    <p className="fw-bolder">In Two Days</p>
                     <p>{dataConverter(inTwoDays.dt)}</p>
                     <Image src={allIcon[inTwoDays.weather[0].icon]} alt="dynamic sky image" width={50} />
                     <p>{tempToC(inTwoDays.main.temp)}°</p>
                   </Col>
                   <Col sm="3" className="text-center">
-                    <h5>In Three Days</h5>
+                    <p className="fw-bolder">In Three Days</p>
                     <p>{dataConverter(inThreeDays.dt)}</p>
                     <Image src={allIcon[inThreeDays.weather[0].icon]} alt="dynamic sky image" width={50} />
                     <p>{tempToC(inThreeDays.main.temp)}°</p>

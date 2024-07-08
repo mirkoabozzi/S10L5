@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Button, Container, Form, InputGroup } from "react-bootstrap";
+import { Button, Container, Form, Image, InputGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/weathericon/compass.svg";
 
 const Search = () => {
   const [userInput, setUserInput] = useState("");
@@ -13,7 +14,11 @@ const Search = () => {
       if (resp.ok) {
         const result = await resp.json();
         console.log("Result", result);
-        navigate(`/details/lat=${result[0].lat}&lon=${result[0].lon}`);
+        if (result.length === 0) {
+          navigate("*");
+        } else {
+          navigate(`/details/lat=${result[0].lat}&lon=${result[0].lon}`);
+        }
       } else {
         throw new Error("Errore nel recupero della località");
       }
@@ -23,17 +28,21 @@ const Search = () => {
   };
 
   return (
-    <Container className="mainContainer mt-5 rounded-4">
-      <h1>Welcome!</h1>
-      <Form onSubmit={geolocalFetch}>
-        <InputGroup className="my-3">
-          <Form.Control type="text" placeholder="Search your country" aria-describedby="basic-addon2" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
-          <Button variant="dark" onClick={geolocalFetch}>
-            Search
-          </Button>
-        </InputGroup>
-      </Form>
-    </Container>
+    <>
+      <Image src={logo} alt="compass logo" width={50} />
+      <span className="fs-6">Weather App</span>
+      <Container className="mainContainer rounded-4">
+        <h1>Welcome!</h1>
+        <Form onSubmit={geolocalFetch}>
+          <InputGroup className="my-3">
+            <Form.Control type="text" placeholder="Search your country" aria-describedby="basic-addon2" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+            <Button variant="dark" onClick={geolocalFetch}>
+              Search
+            </Button>
+          </InputGroup>
+        </Form>
+      </Container>
+    </>
   );
 };
 
