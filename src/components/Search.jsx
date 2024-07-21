@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Container, Form, Image, InputGroup } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import logo from "../assets/weathericon/compass.svg";
 
 const Search = () => {
@@ -16,8 +16,10 @@ const Search = () => {
         console.log("Result", result);
         if (result.length === 0) {
           navigate("*");
+          redirect("*"); // inserito per netlify
         } else {
           navigate(`/details/lat=${result[0].lat}&lon=${result[0].lon}`);
+          redirect(`/details/lat=${result[0].lat}&lon=${result[0].lon}`); // inserito per netlify
         }
       } else {
         throw new Error("Errore nel recupero della località");
