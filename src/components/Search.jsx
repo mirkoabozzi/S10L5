@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Container, Form, Image, InputGroup } from "react-bootstrap";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/weathericon/compass.svg";
 
 const Search = () => {
@@ -10,16 +10,14 @@ const Search = () => {
   const geolocalFetch = async (e) => {
     e.preventDefault();
     try {
-      const resp = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=2&appid=6136007826f2425e507093e16cf8aade`);
+      const resp = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=2&appid=6136007826f2425e507093e16cf8aade`);
       if (resp.ok) {
         const result = await resp.json();
         console.log("Result", result);
         if (result.length === 0) {
           navigate("*");
-          redirect("*"); // inserito per netlify
         } else {
           navigate(`/details/lat=${result[0].lat}&lon=${result[0].lon}`);
-          redirect(`/details/lat=${result[0].lat}&lon=${result[0].lon}`); // inserito per netlify
         }
       } else {
         throw new Error("Errore nel recupero della località");
