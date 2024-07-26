@@ -35,9 +35,11 @@ const Home = () => {
 
   const [forecast, setForecast] = useState([]);
 
-  const tomorrow = forecast[8];
-  const inTwoDays = forecast[16];
-  const inThreeDays = forecast[24];
+  const tomorrow = forecast[7];
+  const inTwoDays = forecast[15];
+  const inThreeDays = forecast[23];
+  const inFourDays = forecast[31];
+  const inFiveDays = forecast[39];
 
   const navigate = useNavigate();
 
@@ -117,7 +119,7 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [country]);
 
-  console.log("Home Weader", weather);
+  // console.log("Home Weader", weather);
   // console.log("Home forecast", forecast);
   // console.log("Tomorrow", tomorrow);
   // console.log("Icon", weather.weather[0].icon);
@@ -217,24 +219,36 @@ const Home = () => {
           <section>
             <Container className="mt-4">
               {tomorrow && (
-                <Row className="justify-content-around">
-                  <Col sm="3" className="text-center">
+                <Row className="justify-content-around flex-nowrap overflow-x-auto">
+                  <Col xs="6" sm="3" className="text-center">
                     <p className="fw-bolder">Tomorrow </p>
                     <p>{dataConverter(tomorrow.dt)}</p>
                     <Image src={allIcon[tomorrow.weather[0].icon]} alt="dynamic sky image" width={50} />
                     <p>{tempToC(tomorrow.main.temp)}°</p>
                   </Col>
-                  <Col sm="3" className="text-center">
+                  <Col xs="6" sm="3" className="text-center">
                     <p className="fw-bolder">In Two Days</p>
                     <p>{dataConverter(inTwoDays.dt)}</p>
                     <Image src={allIcon[inTwoDays.weather[0].icon]} alt="dynamic sky image" width={50} />
                     <p>{tempToC(inTwoDays.main.temp)}°</p>
                   </Col>
-                  <Col sm="3" className="text-center">
+                  <Col xs="6" sm="3" className="text-center">
                     <p className="fw-bolder">In Three Days</p>
                     <p>{dataConverter(inThreeDays.dt)}</p>
                     <Image src={allIcon[inThreeDays.weather[0].icon]} alt="dynamic sky image" width={50} />
                     <p>{tempToC(inThreeDays.main.temp)}°</p>
+                  </Col>
+                  <Col xs="6" sm="3" className="text-center">
+                    <p className="fw-bolder">In Four Days</p>
+                    <p>{dataConverter(inFourDays.dt)}</p>
+                    <Image src={allIcon[inFourDays.weather[0].icon]} alt="dynamic sky image" width={50} />
+                    <p>{tempToC(inFourDays.main.temp)}°</p>
+                  </Col>
+                  <Col xs="6" sm="3" className="text-center">
+                    <p className="fw-bolder">In Five Days</p>
+                    <p>{dataConverter(inFiveDays.dt)}</p>
+                    <Image src={allIcon[inFiveDays.weather[0].icon]} alt="dynamic sky image" width={50} />
+                    <p>{tempToC(inFiveDays.main.temp)}°</p>
                   </Col>
                 </Row>
               )}
