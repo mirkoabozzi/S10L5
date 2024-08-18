@@ -50,28 +50,44 @@ const Search = () => {
   };
 
   return (
-    <>
-      <Image src={logo} alt="compass logo" width={50} />
-      <span className="fs-6">Weather App</span>
+    <Container>
       <Container className="mainContainer rounded-4">
-        <h1>Welcome!</h1>
+        <p className="text-center m-0">Welcome to</p>
+        <div className="text-center">
+          <Image src={logo} alt="compass logo" width={80} />
+        </div>
+        <h1 className="text-center">Weather App</h1>
         <Form onSubmit={geolocalFetch}>
           <InputGroup className="my-3">
-            <Form.Control type="text" placeholder="Search your country" aria-describedby="basic-addon2" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+            <Form.Control
+              className="text-center"
+              type="text"
+              placeholder="Search your country"
+              required
+              aria-describedby="basic-addon2"
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+            />
           </InputGroup>
-          <div className="d-flex align-items-center gap-2">
-            <Button variant="dark" type="submit">
-              Search
-            </Button>
-            <p className="mb-0">or</p>
-            <Button variant="dark" type="button" onClick={getUserLocation}>
-              Get My Current Location
-            </Button>
-            {isLoading && <Spinner />}
+          <div className="d-flex justify-content-center">
+            <div className="d-flex flex-column">
+              <Button variant="outline-light" type="submit">
+                Search
+              </Button>
+              <p className="mb-0 text-center">or</p>
+              <Button variant="outline-light" type="button" onClick={getUserLocation}>
+                Get My Current Location
+              </Button>
+              {isLoading && (
+                <div className="text-center">
+                  <Spinner className="mt-3" />
+                </div>
+              )}
+            </div>
           </div>
         </Form>
       </Container>
-    </>
+    </Container>
   );
 };
 

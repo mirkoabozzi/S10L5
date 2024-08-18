@@ -126,7 +126,7 @@ const Home = () => {
 
   return (
     weather && (
-      <Container className="mainContainer my-3 rounded-4">
+      <Container className="mainContainer rounded-4">
         <header>
           <Row>
             <Col>
@@ -171,7 +171,7 @@ const Home = () => {
         <Container className=" section bg-white border rounded-4">
           <section>
             <Container className="borderBottom">
-              <p className="mt-4 fw-bolder">Weather Information</p>
+              <p className="mt-4 fw-bolder text-center">Weather Information</p>
               <Row className="justify-content-around">
                 <Col xs="4" className="mb-4 text-center">
                   <p className="mb-0">Feels Like</p>

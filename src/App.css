@@ -5,8 +5,8 @@ body {
   font-family: "Roboto", sans-serif;
   font-weight: 600;
   font-style: normal;
-  background-image: url("./assets/img/bg.png");
-  background-position: 0;
+  background: linear-gradient(180deg, #8dd2fa, white);
+  background-repeat: no-repeat;
 }
 
 .mainContainer {
@@ -34,8 +34,6 @@ img:hover {
 }
 .mainTemp {
   font-size: 80px;
-  /* position: absolute;
-  transform: translateX(100px); */
 }
 
 @keyframes fadeIn {

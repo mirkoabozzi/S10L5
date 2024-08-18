@@ -6,7 +6,7 @@ const NotFound = () => {
   return (
     <Container className="mainContainer mt-5 rounded-4 text-center">
       <h1>404 Not Found</h1>
-      <Button variant="light" onClick={() => navigate("/")}>
+      <Button variant="outline-light" onClick={() => navigate("/")}>
         Back To Home
       </Button>
     </Container>
