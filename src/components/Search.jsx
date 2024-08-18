@@ -50,7 +50,7 @@ const Search = () => {
   };
 
   return (
-    <Container>
+    <Container className="my-2">
       <Container className="mainContainer rounded-4">
         <p className="text-center m-0">Welcome to</p>
         <div className="text-center">
