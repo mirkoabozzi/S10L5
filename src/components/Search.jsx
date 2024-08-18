@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Button, Container, Form, Image, InputGroup } from "react-bootstrap";
+import { Button, Container, Form, Image, InputGroup, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/weathericon/compass.svg";
 
 const Search = () => {
   const [userInput, setUserInput] = useState("");
   const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const geolocalFetch = async (e) => {
     e.preventDefault();
@@ -27,6 +29,26 @@ const Search = () => {
     }
   };
 
+  const getUserLocation = () => {
+    setIsLoading(true);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          navigate(`/details/lat=${latitude}&lon=${longitude}`);
+        },
+        (error) => {
+          console.error("Error getting user location:", error);
+          alert(error.message + ". Please try again or enter a location manually.");
+          setIsLoading(false);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <Image src={logo} alt="compass logo" width={50} />
@@ -36,10 +58,17 @@ const Search = () => {
         <Form onSubmit={geolocalFetch}>
           <InputGroup className="my-3">
             <Form.Control type="text" placeholder="Search your country" aria-describedby="basic-addon2" value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+          </InputGroup>
+          <div className="d-flex align-items-center gap-2">
             <Button variant="dark" type="submit">
               Search
             </Button>
-          </InputGroup>
+            <p className="mb-0">or</p>
+            <Button variant="dark" type="button" onClick={getUserLocation}>
+              Get My Current Location
+            </Button>
+            {isLoading && <Spinner />}
+          </div>
         </Form>
       </Container>
     </>
