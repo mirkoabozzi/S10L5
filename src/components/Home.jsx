@@ -83,7 +83,6 @@ const Home = () => {
   const fetchWeather = async () => {
     try {
       const resp = await fetch(`https://api.openweathermap.org/data/2.5/weather?${country}&appid=6136007826f2425e507093e16cf8aade`);
-
       if (resp.ok) {
         const result = await resp.json();
         setWeather(result);
@@ -119,7 +118,7 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [country]);
 
-  // console.log("Home Weader", weather);
+  // console.log("Home Weather", weather);
   // console.log("Home forecast", forecast);
   // console.log("Tomorrow", tomorrow);
   // console.log("Icon", weather.weather[0].icon);
@@ -191,7 +190,7 @@ const Home = () => {
                   {upperCase(weather.weather[0].description)}
                 </Col>
                 <Col xs="4" className="mb-4 text-center">
-                  <p className="mb-0">Umidity</p>
+                  <p className="mb-0">Humidity</p>
                   <Image src={humidity} alt="rain drop" width={50} />
                   {weather.main.humidity} %
                 </Col>

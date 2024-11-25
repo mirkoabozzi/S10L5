@@ -9,7 +9,7 @@ const Search = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const geolocalFetch = async (e) => {
+  const geoLocalFetch = async (e) => {
     e.preventDefault();
     try {
       const resp = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${userInput}&limit=2&appid=6136007826f2425e507093e16cf8aade`);
@@ -50,14 +50,14 @@ const Search = () => {
   };
 
   return (
-    <Container className="my-2">
+    <div className="d-flex align-items-center" style={{ height: "100svh" }}>
       <Container className="mainContainer rounded-4">
         <p className="text-center m-0">Welcome to</p>
         <div className="text-center">
           <Image src={logo} alt="compass logo" width={80} />
         </div>
         <h1 className="text-center">Weather App</h1>
-        <Form onSubmit={geolocalFetch}>
+        <Form onSubmit={geoLocalFetch}>
           <InputGroup className="my-3">
             <Form.Control
               className="text-center"
@@ -76,18 +76,19 @@ const Search = () => {
               </Button>
               <p className="mb-0 text-center">or</p>
               <Button variant="outline-light" type="button" onClick={getUserLocation}>
-                Get My Current Location
+                {isLoading ? (
+                  <div className="text-center">
+                    <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                  </div>
+                ) : (
+                  "Get My Current Location"
+                )}
               </Button>
-              {isLoading && (
-                <div className="text-center">
-                  <Spinner className="mt-3" />
-                </div>
-              )}
             </div>
           </div>
         </Form>
       </Container>
-    </Container>
+    </div>
   );
 };
 

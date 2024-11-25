@@ -44,3 +44,7 @@ img:hover {
     scale: 1;
   }
 }
+
+.btn-outline-light {
+  --bs-btn-hover-color: #1876eb;
+}
